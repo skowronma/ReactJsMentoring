@@ -1,0 +1,56 @@
+.backgroundImage{
+  background-color: #424242;
+}
+
+.header{
+
+}
+
+.pageName{
+  color: #F65261;
+  text-align: left;
+  font-size: x-large;
+  padding: 20px;
+  float: left;
+}
+
+.addButton{
+  color: #F65261;
+  font-weight: bold;
+  text-align: center;
+  background-color: Transparent;
+  border: 1px solid transparent;
+  cursor:pointer;
+  float: right;
+  font-size: x-large;
+  margin: 20px;
+}
+
+input[type="text"] {
+    background: #424242;
+    border: none;
+    padding: 15px;
+    font-size: 1.25em;
+    color: white;
+    margin: 20px;
+    width: 60%;
+}
+
+.searchButton{
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: x-large;
+  background-color: #F65261;
+  border: 1px solid transparent;
+  cursor:pointer;
+}
+
+.footer{
+  margin: 40px;
+  color: #F65261;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #424242;
+  text-align: center;
+}
