@@ -6,7 +6,6 @@
   margin: 0px;
   padding: 0px;
   min-height: 100%;
-  position: absolute;
 }
 
 .backgroundImage{
@@ -85,6 +84,11 @@ h1{
     background-color: #555555;
     height: 10px;
     width: 100%;
+}
+
+.movieCount{
+  padding: 10px;
+  font-size: large;
 }
 
 .footerText{

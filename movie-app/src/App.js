@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './styles/style.css'
 import Header from './components/Header';
-import MoviesList from './components/MoviesList';
+import MoviesContainer from './components/MoviesContainer';
 import SearchComponent from './components/SearchComponent';
 import Separator from './components/Separator';
 import Footer from './components/Footer';
@@ -20,7 +19,7 @@ function App() {
             <SearchComponent/>
           </div>
           <Separator/>
-          <MoviesList/>
+          <MoviesContainer/>
         </div>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>

@@ -3,19 +3,46 @@ import MovieCard from './MovieCard'
 
 let movies=[
 {
-  title:"Rick and Morty",
-  description: "Animated science fiction sitcom",
+  title:"Pulp Fiction",
+  genre: "Action & Adventure",
+  year: "1994",
+  image: "./images/1.jpg",
   id: '1'
 },
 {
-  title:"Stranger Things",
-  description: "American science fiction series",
+  title:"Bohemian Rapsody",
+  genre: "Drama, Biography, Music",
+  year: "2003",
+  image: "./images/2.jpg",
   id: '2'
 },
 {
-  title:"Dark",
-  description: "German science fiction series",
+  title:"Kill Bill: Vol 2",
+  genre: "Oscar Winning Movie",
+  year: "1994",
+  image: "./images/3.jpg",
   id: '3'
+},
+{
+  title:"Avengers: Infinity War",
+  genre: "Action & Adventure",
+  year: "2004",
+  image: "./images/4.jpg",
+  id: '4'
+},
+{
+  title:"Inception",
+  genre: "Action & Adventure",
+  year: "2003",
+  image: "./images/5.jpg",
+  id: '5'
+},
+{
+  title:"Reservoir dogs",
+  genre: "Oscar Winning Movie",
+  year: "1994",
+  image: "./images/6.jpg",
+  id: '6'
 }
 ]
 
@@ -25,7 +52,9 @@ export default function MoviesList(){
     {
       movies.map((movie)=>(
         <MovieCard title={movie.title}
-        description={movie.description}
+        image={movie.image}
+        genre={movie.genre}
+        year= {movie.year}
         key={movie.id}/>
       ))
     }

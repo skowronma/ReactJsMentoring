@@ -1,0 +1,39 @@
+.sort{
+display: inline;
+}
+
+.genreButton{
+  color: white;
+  text-align: center;
+  font-size: large;
+  background-color: #232323;
+  border: 1px solid transparent;
+  cursor:pointer;
+  padding: 10px;
+}
+
+label{
+  color: #555555;
+  text-align: center;
+  font-size: large;
+  background-color: transparent;
+  float :right;
+}
+
+select{
+  color: white;
+  background-color: #232323;
+  border: none;
+  font-size: large;
+  float: right;
+  padding: 5px
+}
+
+option
+{
+  color: white;
+  background-color: #232323;
+  border: none;
+  font-size: large;
+  float: right;
+}
