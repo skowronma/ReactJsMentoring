@@ -1,22 +1,29 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 import './styles/style.css'
 import Header from './components/Header';
 import MoviesList from './components/MoviesList';
 import SearchComponent from './components/SearchComponent';
+import Separator from './components/Separator';
 import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary';
 
+var pageName = "netflixroulette";
 
 function App() {
   return (
     <div className="App">
-    <div className="backgroundImage">
-      <Header pageName="netflixroulette"/>
-      <SearchComponent/>
-    </div>
-      <MoviesList/>
-      <Footer displaytext="netflixroulette"/>
+    <ErrorBoundary>
+        <div>
+          <div className="backgroundImage">
+            <Header pageName={pageName}/>
+            <SearchComponent/>
+          </div>
+          <Separator/>
+          <MoviesList/>
+        </div>
+        <Footer displaytext={pageName}/>
+      </ErrorBoundary>
     </div>
   );
 }

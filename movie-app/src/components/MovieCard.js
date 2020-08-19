@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function MovieCard (props){
   return  (
@@ -7,3 +8,8 @@ export default function MovieCard (props){
       <p>{props.description}</p>
     </div>
   )}
+
+MovieCard.propTypes ={
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
+}

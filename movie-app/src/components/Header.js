@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Header(props){
   return (
-    <header className="header">
+    <div class="header">
       <b className="pageName">{props.pageName}</b>
       <button className="addButton">+ ADD MOVIE</button>
-    </header>
+    </div>
   )
 }

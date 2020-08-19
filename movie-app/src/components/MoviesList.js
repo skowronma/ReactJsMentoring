@@ -21,7 +21,7 @@ let movies=[
 
 export default function MoviesList(){
     return  (
-    <>
+    <div className="movieList">
     {
       movies.map((movie)=>(
         <MovieCard title={movie.title}
@@ -29,5 +29,5 @@ export default function MoviesList(){
         key={movie.id}/>
       ))
     }
-    </>
+    </div>
   )}
