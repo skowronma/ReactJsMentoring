@@ -1,0 +1,35 @@
+.movieCard{
+   width: 30%;
+   height: 30%;
+   cursor: pointer;
+   padding: 10px;
+   float: left;
+}
+
+.movieInfo {
+    float: left;
+}
+
+.movieAllInfo {
+    margin: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.movieYear {
+  float: right;
+  padding-top: 10px;
+}
+
+.moviePoster{
+border-radius: 8px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 60%;
+}
+
+.movieCount{
+  padding: 10px;
+  font-size: large;
+}

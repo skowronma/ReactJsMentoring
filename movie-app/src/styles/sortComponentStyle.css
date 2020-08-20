@@ -1,5 +1,5 @@
 .sort{
-display: inline;
+  display: inline;
 }
 
 .genreButton{
@@ -15,18 +15,19 @@ display: inline;
 label{
   color: #555555;
   text-align: center;
-  font-size: large;
+  font-size: 22px;
   background-color: transparent;
   float :right;
+  padding:3px;
 }
 
 select{
   color: white;
   background-color: #232323;
   border: none;
-  font-size: large;
+  font-size: 20px;
   float: right;
-  padding: 5px
+  padding: 4px;
 }
 
 option
@@ -34,6 +35,5 @@ option
   color: white;
   background-color: #232323;
   border: none;
-  font-size: large;
-  float: right;
+  font-size: 15px;
 }
