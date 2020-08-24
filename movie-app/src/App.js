@@ -12,16 +12,14 @@ var pageName = "netflixroulette";
 function App() {
   return (
     <div className="App">
-    <ErrorBoundary>
-        <div>
+      <ErrorBoundary>
           <div className="backgroundImage">
             <Header pageName={pageName}/>
             <SearchComponent/>
           </div>
           <Separator/>
           <MoviesContainer/>
-        </div>
-        <Footer displaytext={pageName}/>
+          <Footer displaytext={pageName}/>
       </ErrorBoundary>
     </div>
   );

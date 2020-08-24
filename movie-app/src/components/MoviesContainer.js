@@ -7,10 +7,10 @@ let movieCount = 39;
 
 export default function MoviesContainer(){
   return (
-    <>
+    <div>
     <SortComponent/>
     <MoviesCount movieCount={movieCount} />
     <MoviesList/>
-    </>
+    </div>
 
 )}
