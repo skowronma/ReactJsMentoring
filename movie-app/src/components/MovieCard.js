@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/movieComponentsStyle.css';
+import ThreeDots from './ThreeDots'
 
 export default function MovieCard (props){
+  const [isShown, setIsShown] = useState(false);
+
   return  (
-    <div className="movieCard">
+    <div className="movieCard"
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}>
+      {isShown && <ThreeDots/>}
       <img className="moviePoster" alt="movie poster" src={props.image}/>
       <div className="movieAllInfo">
           <div className="movieInfo">

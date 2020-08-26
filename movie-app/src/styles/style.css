@@ -12,12 +12,6 @@
    background-image: url("../images/background.jpg");
 }
 
-.backgroundImage::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
 .header {
   padding: 60px;
   text-align: center;
