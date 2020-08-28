@@ -1,5 +1,6 @@
 import React from 'react';
-import './styles/style.css'
+import './styles/style.css';
+import './styles/modalStyle.css';
 import Header from './components/Header';
 import MoviesContainer from './components/MoviesContainer';
 import SearchComponent from './components/SearchComponent';
