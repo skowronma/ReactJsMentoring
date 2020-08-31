@@ -7,20 +7,22 @@ export default function MovieCard (props){
   const [isShown, setIsShown] = useState(false);
 
   return  (
-    <div className="movieCard"
-        onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}>
+    <div
+      className='movieCard'
+      onMouseEnter={() => setIsShown(true)}
+      onMouseLeave={() => setIsShown(false)}>
       {isShown && <ThreeDots/>}
-      <img className="moviePoster" alt="movie poster" src={props.image}/>
-      <div className="movieAllInfo">
-          <div className="movieInfo">
-              <p>{props.title}</p>
-              <p>{props.genre}</p>
-          </div>
-          <div className="movieYear">{props.year}</div>
+      <img className='moviePoster' alt='movie poster' src={props.image}/>
+      <div className='movieAllInfo'>
+        <div className='movieInfo'>
+            <p>{props.title}</p>
+            <p>{props.genre}</p>
+        </div>
+        <div className='movieYear' >{props.year}</div>
       </div>
     </div>
-  )}
+  )
+}
 
 MovieCard.propTypes ={
   title: PropTypes.string.isRequired,

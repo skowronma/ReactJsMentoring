@@ -12,6 +12,9 @@
     "react-scripts": "3.4.3",
     "webkit-npm": "^3.1.1"
   },
+  "devDependencies": {
+    "standard": "*"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -33,5 +36,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "standard": "^14.3.4"
+  }
 }

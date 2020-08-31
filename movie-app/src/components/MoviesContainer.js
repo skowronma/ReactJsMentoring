@@ -3,14 +3,14 @@ import MoviesCount from './MoviesCount';
 import MoviesList from './MoviesList';
 import SortComponent from './SortComponent';
 
-let movieCount = 39;
+const movieCount = 39;
 
 export default function MoviesContainer(){
   return (
     <div>
-    <SortComponent/>
-    <MoviesCount movieCount={movieCount} />
-    <MoviesList/>
+      <SortComponent/>
+      <MoviesCount movieCount={movieCount} />
+      <MoviesList/>
     </div>
-
-)}
+  )
+}

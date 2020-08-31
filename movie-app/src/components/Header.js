@@ -23,11 +23,11 @@ render() {
   var showAddMovie = this.state.showAddMovieModal
             ? ( <AddMovie pageName={this.props.pageName}
               onCloseRequest={this.closeAddMovie}/>)
-            : "";
+            : '';
   return (
-    <div className="header">
-      <b className="pageName">{this.props.pageName}</b>
-      <button className="addButton" onClick={this.addMovie}>+ ADD MOVIE</button>
+    <div className='header'>
+      <b className='pageName'>{this.props.pageName}</b>
+      <button className='addButton' onClick={this.addMovie}>+ ADD MOVIE</button>
       {showAddMovie}
     </div>
   )}
