@@ -7,6 +7,9 @@ let movies=[
     title: 'Pulp Fiction',
     genre: 'Action & Adventure',
     year: '1994',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/1.jpg',
     id: '1'
   },
@@ -14,6 +17,9 @@ let movies=[
     title: 'Bohemian Rapsody',
     genre: 'Drama, Biography, Music',
     year: '2003',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/2.jpg',
     id: '2'
   },
@@ -21,6 +27,9 @@ let movies=[
     title: 'Kill Bill: Vol 2',
     genre: 'Oscar Winning Movie',
     year: '1994',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/3.jpg',
     id: '3'
   },
@@ -28,6 +37,9 @@ let movies=[
     title: 'Avengers: Infinity War',
     genre: 'Action & Adventure',
     year: '2004',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/4.jpg',
     id: '4'
   },
@@ -35,6 +47,9 @@ let movies=[
     title: 'Inception',
     genre: 'Action & Adventure',
     year: '2003',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/5.jpg',
     id: '5'
   },
@@ -42,6 +57,9 @@ let movies=[
     title: 'Reservoir dogs',
     genre: 'Oscar Winning Movie',
     year: '1994',
+    movieUrl : 'Some url',
+    overview: 'Some desctription',
+    runtime : '',
     image: './images/6.jpg',
     id: '6'
   }

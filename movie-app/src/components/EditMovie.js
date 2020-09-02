@@ -3,31 +3,22 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from './Modal';
 
-export default class AddMovie extends React.Component{
+export default function EditMovie extends React.Component{
   constructor(props) {
    super(props);
-   this.state = {
-     title: '',
-     releaseDate: '',
-     movieUrl : '',
-     genre: '',
-     overview: '',
-     runtime : ''
-    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetForm = this.resetForm.bind(this);
    }
 
   handleChange(event) {
-   const target = event.target;
-   const name = target.name;
-   this.setState({[name]: target.value});
+   this.setState({[event.target.name]: event.target.value});
   }
 
   handleSubmit(event) {
    event.preventDefault();
-   console.log('Movie added');
+   console.log('Movie edited');
   }
 
   setDate(date){
@@ -35,35 +26,34 @@ export default class AddMovie extends React.Component{
   }
 
   resetForm(){
-     this.setState({ title: ''});
-     this.setState({ releaseDate: ''});
-     this.setState({ movieUrl: ''});
-     this.setState({ genre: ''});
-     this.setState({ overview: ''});
-     this.setState({ runtime: ''});
+
   }
 
   render(){
     return (
       <Modal onCloseRequest={this.props.onCloseRequest}>
-       <h1>ADD MOVIE</h1>
+       <h1>EDIT MOVIE</h1>
        <div className='formStyle'>
          <form onSubmit={this.handleSubmit}>
+         <label>
+           Movie ID:
+           <label value={this.movie.id}/>
+         </label>
           <label>
             Title:
-            <input type='text' name='title' className='formStyleInput' placeholder='Movie title here' value={this.state.title} onChange={this.handleChange}/>
+            <input type='text' name='title' className='formStyleInput' value={this.movie.title} onChange={this.handleChange}/>
           </label>
           <label>
             Release date:
-            <DatePicker selected={this.state.releaseDate} className='formStyleInput' placeholder='Select date' onChange={date => this.setDate(date)}/>
+            <DatePicker selected={this.movie.releaseDate} className='formStyleInput' onChange={date => this.setDate(date)}/>
           </label>
           <label>
             Movie URL:
-            <input type='text' name='movieUrl' className='formStyleInput' placeholder='Movie URL here' value={this.state.movieUrl} onChange={this.handleChange} />
+            <input type='text' name='movieUrl' className='formStyleInput' value={this.movie.movieUrl} onChange={this.handleChange} />
           </label>
           <label>
             Genre:
-            <select value={this.state.genre} name='genre' placeholder='Select genre' onChange={this.handleChange}>
+            <select value={this.movie.genre} name='genre' onChange={this.handleChange}>
               <option value='documentary'>DOCUMENTARY</option>
               <option value='comedy'>COMEDY</option>
               <option value='horror'>HORROR</option>
@@ -72,11 +62,11 @@ export default class AddMovie extends React.Component{
           </label>
           <label>
             Overview:
-            <input type='text' name='overview' className='formStyleInput' placeholder='Overview here' value={this.state.overview} onChange={this.handleChange} />
+            <input type='text' name='overview' className='formStyleInput'value={this.movie.overview} onChange={this.handleChange} />
           </label>
           <label>
             Runtime:
-            <input type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' value={this.state.runtime} onChange={this.handleChange} />
+            <input type='text' name='runtime' className='formStyleInput' value={this.movie.runtime} onChange={this.handleChange} />
           </label>
           <input className='resetInput' type='reset' value='Reset' onClick={this.resetForm} />
           <input className='submitInput' type='submit' value='Submit'/>

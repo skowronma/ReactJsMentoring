@@ -46,3 +46,27 @@ width: 60%;
   margin-left: 70%;
   margin-bottom: -50px;
 }
+
+.contextMenu{
+    position: relative;
+    color: white;
+    background-color: #424242;
+    text-align: right;
+    width: 30%;
+    height: 50%;
+    margin-right: 20%;
+    float:right;
+}
+
+.contextMenuClose {
+    cursor: pointer;
+}
+
+.contextMenuItem {
+  text-align: left;
+  cursor: pointer;
+}
+
+.contextMenuItem:hover {
+    background-color: #F65261;
+}
