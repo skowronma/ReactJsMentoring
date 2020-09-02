@@ -11,7 +11,7 @@ export default function MovieCard (props){
       className='movieCard'
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}>
-      {isShown && <ThreeDots/>}
+      {isShown && <ThreeDots movie={props}/>}
       <img className='moviePoster' alt='movie poster' src={props.image}/>
       <div className='movieAllInfo'>
         <div className='movieInfo'>

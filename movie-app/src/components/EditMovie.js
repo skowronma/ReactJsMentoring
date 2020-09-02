@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from './Modal';
 
-export default function EditMovie extends React.Component{
+export default class EditMovie extends React.Component{
   constructor(props) {
    super(props);
 

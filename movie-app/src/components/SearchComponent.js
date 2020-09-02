@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 export default function SearchComponent(){
   const [movieToSearch, setMovieToSearch] = useState('');
   function searchMovie() {
-       console.log("Searching for movie " + movieToSearch);
+       console.log('Searching for movie ' + movieToSearch);
    }
   return (
     <div className='searchComponent'>
