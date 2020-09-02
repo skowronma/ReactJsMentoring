@@ -103,3 +103,19 @@ DatePicker {
 .form-style-2 .select:focus{
 	border: 1px solid #0C0;
 }
+
+.deleteModal{
+  margin-left: 20px;
+}
+
+.confirmButton {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: large;
+  background-color: #F65261;
+  border: 1px solid transparent;
+  cursor:pointer;
+  padding: 10px;
+  margin-left: 50%;
+}

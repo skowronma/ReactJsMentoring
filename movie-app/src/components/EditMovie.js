@@ -6,7 +6,7 @@ import Modal from './Modal';
 export default class EditMovie extends React.Component{
   constructor(props) {
    super(props);
-
+    this.movie = props.movie
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetForm = this.resetForm.bind(this);

@@ -9,9 +9,9 @@ export default function DeleteMovie(props){
   return (
     <Modal onCloseRequest={props.onCloseRequest}>
      <h1>DELETE MOVIE</h1>
-     <div className=''>
+     <div className='deleteModal'>
      <p>Are you sure you want to delete the movie: {props.movie.title}?</p>
-     <button className='' onClick={() => deleteMovie()}>CONFIRM</button>
+     <button className='confirmButton' onClick={() => deleteMovie()}>CONFIRM</button>
      </div>
      </Modal>
   )

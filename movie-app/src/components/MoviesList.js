@@ -5,7 +5,7 @@ import '../styles/movieComponentsStyle.css';
 let movies=[
   {
     title: 'Pulp Fiction',
-    genre: 'Action & Adventure',
+    genre: 'crime',
     year: '1994',
     movieUrl : 'Some url',
     overview: 'Some desctription',
@@ -70,12 +70,7 @@ export default function MoviesList(){
     <div className='moviesList'>
     {
       movies.map((movie) => (
-        <MovieCard
-         title={movie.title}
-         image={movie.image}
-         genre={movie.genre}
-         year= {movie.year}
-         key={movie.id}/>
+        <MovieCard movie={movie} key={movie.id}/>
       ))
     }
     </div>
