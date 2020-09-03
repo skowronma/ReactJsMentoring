@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 
 export default function SearchComponent(props){
   const [movieToSearch, setMovieToSearch] = useState('');
-  function searchMovie() {
-       console.log('Searching for movie ' + movieToSearch);
-   }
+
   return (
     <div className='searchComponent'>
       <h1>FIND YOUR MOVIE</h1>
@@ -12,7 +10,7 @@ export default function SearchComponent(props){
       value={movieToSearch}
       onChange={event => setMovieToSearch(event.target.value)}
       />
-      <button className='searchButton' onClick={() => searchMovie()}>SEARCH</button>
+      <button className='searchButton' onClick={props.onSearch}>SEARCH</button>
     </div>
 
   )

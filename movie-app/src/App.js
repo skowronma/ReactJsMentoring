@@ -72,20 +72,37 @@ let movies=[
   }
 ]
 
-function App() {
+export default class App extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      search : null
+    };
+  }
+
+  render(){
+    var search = (event) => {
+        console.log('Searching for movie ' + event.target.value);
+        this.setState({search:event.target.value})
+      };
+    const items = movies.filter((data) => {
+    if(this.state.search == null)
+        return data
+    else if(data.title.toLowerCase().includes(this.state.search.toLowerCase())){
+        return data
+    }
+  })
   return (
     <div className='App'>
       <ErrorBoundary>
         <div className='backgroundImage'>
           <Header pageName={pageName}/>
-          <SearchComponent movies={movies}/>
+          <SearchComponent movies={movies} onSearch={search}/>
         </div>
         <Separator/>
-        <MoviesContainer movies={movies}/>
+        <MoviesContainer movies={items}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
     </div>
   )
-}
-
-export default App
+}}
