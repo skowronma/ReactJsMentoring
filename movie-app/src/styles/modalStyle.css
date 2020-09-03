@@ -119,3 +119,7 @@ DatePicker {
   padding: 10px;
   margin-left: 50%;
 }
+
+.displayInline{
+  display: inline !important;
+}

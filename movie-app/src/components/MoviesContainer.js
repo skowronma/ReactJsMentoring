@@ -5,12 +5,12 @@ import SortComponent from './SortComponent';
 
 const movieCount = 39;
 
-export default function MoviesContainer(){
+export default function MoviesContainer(props){
   return (
     <div>
       <SortComponent/>
       <MoviesCount movieCount={movieCount} />
-      <MoviesList/>
+      <MoviesList movies={props.movies}/>
     </div>
   )
 }

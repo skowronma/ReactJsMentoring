@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export default function SearchComponent(){
+export default function SearchComponent(props){
   const [movieToSearch, setMovieToSearch] = useState('');
   function searchMovie() {
        console.log('Searching for movie ' + movieToSearch);

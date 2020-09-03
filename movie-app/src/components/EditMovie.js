@@ -37,7 +37,7 @@ export default class EditMovie extends React.Component{
          <form onSubmit={this.handleSubmit}>
          <label>
            Movie ID:
-           <label value={this.movie.id}/>
+           <label className='displayInline'>{this.movie.id}</label>
          </label>
           <label>
             Title:
