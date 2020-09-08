@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
 var pageName = 'netflixroulette';
-let movies=[
+let allMovies=[
   {
     title: 'Pulp Fiction',
     genre: 'crime',
@@ -73,36 +73,41 @@ let movies=[
 ]
 
 export default class App extends React.Component {
-  constructor(){
-    super();
-    this.state={
-      search : null
+  constructor(props){
+    super(props);
+    this.state = {
+      movies : allMovies
     };
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  handleSearch(searchedMovie) {
+  if (!searchedMovie) {
+    this.setState({ movies: allMovies });
+  }
+
+  const filteredMovies = allMovies.filter((movie) =>
+    movie.title
+      .toLocaleLowerCase()
+      .includes(searchedMovie.toLocaleLowerCase())
+  );
+
+  this.setState({ movies: filteredMovies });
   }
 
   render(){
-    var search = (event) => {
-        console.log('Searching for movie ' + event.target.value);
-        this.setState({search:event.target.value})
-      };
-    const items = movies.filter((data) => {
-    if(this.state.search == null)
-        return data
-    else if(data.title.toLowerCase().includes(this.state.search.toLowerCase())){
-        return data
-    }
-  })
-  return (
+    return (
     <div className='App'>
       <ErrorBoundary>
         <div className='backgroundImage'>
           <Header pageName={pageName}/>
-          <SearchComponent movies={movies} onSearch={search}/>
+          <SearchComponent onSearch={this.handleSearch}/>
         </div>
         <Separator/>
-        <MoviesContainer movies={items}/>
+        <MoviesContainer movies={this.state.movies}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
     </div>
   )
-}}
+}
+}

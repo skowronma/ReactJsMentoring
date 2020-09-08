@@ -10,7 +10,9 @@ export default function SearchComponent(props){
       value={movieToSearch}
       onChange={event => setMovieToSearch(event.target.value)}
       />
-      <button className='searchButton' onClick={props.onSearch}>SEARCH</button>
+      <button className='searchButton'
+       onClick={() => props.onSearch(movieToSearch)}
+       >SEARCH</button>
     </div>
 
   )
