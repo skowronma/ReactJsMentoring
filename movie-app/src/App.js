@@ -7,6 +7,7 @@ import SearchComponent from './components/SearchComponent';
 import Separator from './components/Separator';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
+import MovieReview from './components/MovieReview';
 
 var pageName = 'netflixroulette';
 let allMovies=[
@@ -18,6 +19,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/1.jpg',
+    duration: '154 min',
+    rating: '4.3',
     id: '1'
   },
   {
@@ -28,6 +31,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/2.jpg',
+    duration: '134 min',
+    rating: '4.1',
     id: '2'
   },
   {
@@ -38,6 +43,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/3.jpg',
+    duration: '120 min',
+    rating: '4.5',
     id: '3'
   },
   {
@@ -48,6 +55,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/4.jpg',
+    duration: '154 min',
+    rating: '4.0',
     id: '4'
   },
   {
@@ -58,6 +67,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/5.jpg',
+    duration: '144 min',
+    rating: '3.9',
     id: '5'
   },
   {
@@ -68,6 +79,8 @@ let allMovies=[
     overview: 'Some description',
     runtime : '...',
     image: './images/6.jpg',
+    duration: '104 min',
+    rating: '4.0',
     id: '6'
   }
 ]
@@ -76,9 +89,12 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      movies : allMovies
+      movies : allMovies,
+      isMovieReview : false,
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.closeMovieReview = this.closeMovieReview.bind(this);
+    this.movie = null;
   }
 
   handleSearch(searchedMovie) {
@@ -95,16 +111,33 @@ export default class App extends React.Component {
   this.setState({ movies: filteredMovies });
   }
 
+  showMovieReview(movie){
+    this.movie = movie;
+    this.setState({ isMovieReview: true });
+  }
+
+  closeMovieReview(){
+    this.movie= null;
+    this.setState({ isMovieReview : false });
+  }
+
   render(){
+    var movieReviewPanel = this.state.isMovieReview ?
+      ( <div>
+          <MovieReview movie={this.movie}
+           onClose={this.closeMovieReview}/>
+        </div>)
+    : ( <div className='backgroundImage'>
+          <Header pageName={pageName}/>
+          <SearchComponent onSearch={this.handleSearch}/>
+        </div>)
     return (
     <div className='App'>
       <ErrorBoundary>
-        <div className='backgroundImage'>
-          <Header pageName={pageName}/>
-          <SearchComponent onSearch={this.handleSearch}/>
-        </div>
+        {movieReviewPanel}
         <Separator/>
-        <MoviesContainer movies={this.state.movies}/>
+        <MoviesContainer movies={this.state.movies}
+        onClick={ (movie) => this.showMovieReview(movie)}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
     </div>

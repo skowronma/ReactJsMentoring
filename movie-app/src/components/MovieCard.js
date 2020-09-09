@@ -61,6 +61,10 @@ export default function MovieCard (props){
             ? ( <DeleteMovie movie={props.movie}
               onCloseRequest={closeDeleteMovie}/>)
             : '';
+            
+  const showMovieReview = () => {
+    props.onClick(props.movie)
+  };
 
   return  (
     <div
@@ -71,7 +75,8 @@ export default function MovieCard (props){
       {isContextMenuOpen && <ContextMenu menuItems={menuItems} onClose={closeContextMenu}/>}
       {isDeleteModalOpen && showDeleteMovie}
       {isEditModalOpen && showEditMovie}
-      <img className='moviePoster' alt='movie poster' src={props.movie.image}/>
+      <img className='moviePoster' alt='movie poster' src={props.movie.image}
+      onClick={() => showMovieReview()}/>
       <div className='movieAllInfo'>
         <div className='movieInfo'>
             <p>{props.movie.title}</p>

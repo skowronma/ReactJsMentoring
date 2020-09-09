@@ -10,7 +10,7 @@ export default function MoviesContainer(props){
     <div>
       <SortComponent/>
       <MoviesCount movieCount={movieCount} />
-      <MoviesList movies={props.movies}/>
+      <MoviesList movies={props.movies} onClick={(movie) => props.onClick(movie)}/>
     </div>
   )
 }

@@ -7,7 +7,7 @@ export default function MoviesList(props){
     <div className='moviesList'>
     {
       props.movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id}/>
+        <MovieCard movie={movie} key={movie.id} onClick={(item) => props.onClick(item)}/>
       ))
     }
     </div>
