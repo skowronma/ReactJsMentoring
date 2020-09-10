@@ -11,7 +11,7 @@ export default class AddMovie extends React.Component{
      releaseDate: '',
      movieUrl : '',
      genre: '',
-     overview: '',
+     duration: '',
      runtime : ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +39,7 @@ export default class AddMovie extends React.Component{
      this.setState({ releaseDate: ''});
      this.setState({ movieUrl: ''});
      this.setState({ genre: ''});
-     this.setState({ overview: ''});
+     this.setState({ duration: ''});
      this.setState({ runtime: ''});
   }
 
@@ -71,8 +71,8 @@ export default class AddMovie extends React.Component{
             </select>
           </label>
           <label>
-            Overview:
-            <input type='text' name='overview' className='formStyleInput' placeholder='Overview here' value={this.state.overview} onChange={this.handleChange} />
+            duration:
+            <input type='text' name='duration' className='formStyleInput' placeholder='duration here' value={this.state.duration} onChange={this.handleChange} />
           </label>
           <label>
             Runtime:

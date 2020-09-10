@@ -70,3 +70,27 @@ width: 60%;
 .contextMenuItem:hover {
     background-color: #F65261;
 }
+
+.movieReview {
+padding: 10px;
+display: grid;
+}
+
+.movieReviePoster{
+float: left;
+padding : 10px;
+}
+
+.redText{
+ color: #F65261;
+ margin-right: 30px;
+}
+
+.greenText{
+ color: green;
+ margin-left: 30px;
+}
+
+.movieReviewOverview{
+padding-right: 70px;
+}

@@ -13,13 +13,12 @@ var pageName = 'netflixroulette';
 let allMovies=[
   {
     title: 'Pulp Fiction',
-    genre: 'crime',
+    genre: 'Crime',
     year: '1994',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'Pulp Fiction is a 1994 American neo-noir black comedy crime film written and directed by Quentin Tarantino, who conceived it with Roger Avary. Starring John Travolta, Samuel L. Jackson, Bruce Willis, Tim Roth, Ving Rhames, and Uma Thurman, it tells several stories of criminal Los Angeles. The title refers to the pulp magazines and hardboiled crime novels popular during the mid-20th century, known for their graphic violence and punchy dialogue',
+    duration : '154 min',
     image: './images/1.jpg',
-    duration: '154 min',
     rating: '4.3',
     id: '1'
   },
@@ -28,8 +27,7 @@ let allMovies=[
     genre: 'Drama, Biography, Music',
     year: '2003',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Live Aid (1985)',
     image: './images/2.jpg',
     duration: '134 min',
     rating: '4.1',
@@ -40,8 +38,7 @@ let allMovies=[
     genre: 'Oscar Winning Movie',
     year: '1994',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle',
     image: './images/3.jpg',
     duration: '120 min',
     rating: '4.5',
@@ -52,8 +49,7 @@ let allMovies=[
     genre: 'Action & Adventure',
     year: '2004',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.',
     image: './images/4.jpg',
     duration: '154 min',
     rating: '4.0',
@@ -64,8 +60,7 @@ let allMovies=[
     genre: 'Action & Adventure',
     year: '2003',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
     image: './images/5.jpg',
     duration: '144 min',
     rating: '3.9',
@@ -76,8 +71,7 @@ let allMovies=[
     genre: 'Oscar Winning Movie',
     year: '1994',
     movieUrl : 'Some url',
-    overview: 'Some description',
-    runtime : '...',
+    overview: 'When a simple jewelry heist goes horribly wrong, the surviving criminals begin to suspect that one of them is a police informant',
     image: './images/6.jpg',
     duration: '104 min',
     rating: '4.0',
@@ -124,7 +118,7 @@ export default class App extends React.Component {
   render(){
     var movieReviewPanel = this.state.isMovieReview ?
       ( <div>
-          <MovieReview movie={this.movie}
+          <MovieReview movie={this.movie} pageName={pageName}
            onClose={this.closeMovieReview}/>
         </div>)
     : ( <div className='backgroundImage'>

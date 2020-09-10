@@ -66,7 +66,7 @@ export default class EditMovie extends React.Component{
           </label>
           <label>
             Runtime:
-            <input type='text' name='runtime' className='formStyleInput' value={this.movie.runtime} onChange={this.handleChange} />
+            <input type='text' name='runtime' className='formStyleInput' value={this.movie.duration} onChange={this.handleChange} />
           </label>
           <input className='resetInput' type='reset' value='Reset' onClick={this.resetForm} />
           <input className='submitInput' type='submit' value='Submit'/>
