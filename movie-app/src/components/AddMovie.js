@@ -35,12 +35,7 @@ export default class AddMovie extends React.Component{
   }
 
   resetForm(){
-     this.setState({ title: ''});
-     this.setState({ releaseDate: ''});
-     this.setState({ movieUrl: ''});
-     this.setState({ genre: ''});
-     this.setState({ duration: ''});
-     this.setState({ runtime: ''});
+     this.setState({ title: '', releaseDate: '',movieUrl: '',genre: '',duration: '', runtime: '' });
   }
 
   render(){
