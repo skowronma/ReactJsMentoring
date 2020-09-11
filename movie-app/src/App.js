@@ -1,4 +1,5 @@
 import React from 'react';
+import {createStore} from 'redux';
 import './styles/style.css';
 import './styles/modalStyle.css';
 import Header from './components/Header';
