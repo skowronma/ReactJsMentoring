@@ -1,5 +1,4 @@
 import React from 'react';
-import {createStore} from 'redux';
 import './styles/style.css';
 import './styles/modalStyle.css';
 import Header from './components/Header';
@@ -9,6 +8,7 @@ import Separator from './components/Separator';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import MovieReview from './components/MovieReview';
+import * as actions from './actions/actionCreator';
 
 var pageName = 'netflixroulette';
 let allMovies=[
@@ -80,11 +80,22 @@ let allMovies=[
   }
 ]
 
+function mapStateToProps(state) {
+  return {
+    movies: state.movies,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getMovies: () => dispatch(actions.getMovies()),
+  };
+}
+
 export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      movies : allMovies,
       isMovieReview : false,
     };
     this.handleSearch = this.handleSearch.bind(this);
@@ -117,6 +128,7 @@ export default class App extends React.Component {
   }
 
   render(){
+    const {movies} = this.props;
     var movieReviewPanel = this.state.isMovieReview ?
       ( <div>
           <MovieReview movie={this.movie} pageName={pageName}

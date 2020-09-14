@@ -7,33 +7,23 @@ export const DELETE_MOVIE = 'DELETE_MOVIE';
 export function getAllMoviesError(error){
     const action={
         type: GET_ALL_ERROR,
-        error
+        error: error
     }
     return action;
 }
 
-export function getAllMovies(allMovies){
+export function getAllMovies(movies){
     const action={
         type: GET_ALL,
-        allMovies
+        movies: movies
     }
     return action;
 }
-
-// function fetchPosts(subreddit) {
-//   return dispatch => {
-//     dispatch(requestPosts(subreddit))
-//     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-//       .then(response => response.json())
-//       .then(json => dispatch(receivePosts(subreddit, json)))
-//   }
-// }
-
 
 export function addMovie(movie){
     const action={
         type: ADD_MOVIE,
-        movie
+        movie: movie
     }
     return action;
 }
@@ -41,7 +31,7 @@ export function addMovie(movie){
 export function editMovie(movie){
     const action={
         type:EDIT_MOVIE,
-        movie
+        movie: movie
     }
     return action;
 }
@@ -49,7 +39,20 @@ export function editMovie(movie){
 export function deleteTodo(id){
     const action={
         type:DELETE_MOVIE,
-        id
+        id : id
     }
     return action;
+}
+
+export function getMovies() {
+  return dispatch => {
+    fetch('http://localhost:4000/movies')
+      .then(response => response.json())
+      .then(movies => {
+        dispatch(getAllMovies(movies));
+      })
+      .catch(error => {
+        dispatch(getAllMoviesError(error));
+      })
+  }
 }
