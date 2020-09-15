@@ -1,4 +1,4 @@
-import { GET_ALL, GET_ALL_ERROR, ADD_MOVIE, EDIT_MOVIE, DELETE_MOVIE } from './actionCreator';
+import { GET_ALL, GET_ALL_ERROR } from './actionCreator';
 
 const rootReducer = (state = {}, action) => {
   switch (action.type) {

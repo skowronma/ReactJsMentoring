@@ -5,7 +5,7 @@ export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 export function getAllMoviesError(error){
-    const action={
+  const action={
         type: GET_ALL_ERROR,
         error: error
     }
@@ -17,6 +17,7 @@ export function getAllMovies(movies){
         type: GET_ALL,
         movies: movies
     }
+
     return action;
 }
 

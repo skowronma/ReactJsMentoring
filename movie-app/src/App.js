@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import MovieReview from './components/MovieReview';
 import * as actions from './actions/actionCreator';
+import { connect } from 'react-redux';
 
 var pageName = 'netflixroulette';
 let allMovies=[
@@ -82,7 +83,7 @@ let allMovies=[
 
 function mapStateToProps(state) {
   return {
-    movies: state.movies,
+    movies: state.data,
   };
 }
 
@@ -92,7 +93,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -102,6 +103,10 @@ export default class App extends React.Component {
     this.closeMovieReview = this.closeMovieReview.bind(this);
     this.movie = null;
   }
+
+componentDidMount(){
+  this.props.getMovies();
+}
 
   handleSearch(searchedMovie) {
   if (!searchedMovie) {
@@ -143,7 +148,7 @@ export default class App extends React.Component {
       <ErrorBoundary>
         {movieReviewPanel}
         <Separator/>
-        <MoviesContainer movies={this.state.movies}
+        <MoviesContainer movies={movies}
         onClick={ (movie) => this.showMovieReview(movie)}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
@@ -151,3 +156,4 @@ export default class App extends React.Component {
   )
 }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(App);
