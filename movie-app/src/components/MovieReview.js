@@ -10,15 +10,15 @@ export default function MovieReview(props){
             </div>
             <div>
                 <div className='movieReviePoster'>
-                    <img className='moviePoster' src={props.movie.image} alt='Film poster'/>
+                    <img className='moviePoster' src={props.movie.poster_path} alt='Film poster'/>
                 </div>
                 <div>
                     <h1>{props.movie.title}
-                      <span className='greenText'>{props.movie.rating}</span>
+                      <span className='greenText'>{props.movie.vote_average}</span>
                     </h1>
                     <p>{props.movie.genre}</p>
-                    <span className='redText'>{props.movie.year}</span>
-                    <span className='redText'>{props.movie.duration}</span>
+                    <span className='redText'>{props.movie.release_date}</span>
+                    <span className='redText'>{props.movie.runtime} min</span>
                     <p className='movieReviewOverview'>{props.movie.overview}</p>
                 </div>
             </div>

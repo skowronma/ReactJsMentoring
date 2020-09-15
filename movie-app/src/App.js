@@ -8,6 +8,8 @@ import Separator from './components/Separator';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import MovieReview from './components/MovieReview';
+import * as actions from './actions/actionCreator';
+import { connect } from 'react-redux';
 
 var pageName = 'netflixroulette';
 let allMovies=[
@@ -79,17 +81,32 @@ let allMovies=[
   }
 ]
 
-export default class App extends React.Component {
+function mapStateToProps(state) {
+  return {
+    movies: state.data,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getMovies: () => dispatch(actions.getMovies()),
+  };
+}
+
+class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      movies : allMovies,
       isMovieReview : false,
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.closeMovieReview = this.closeMovieReview.bind(this);
     this.movie = null;
   }
+
+componentDidMount(){
+  this.props.getMovies();
+}
 
   handleSearch(searchedMovie) {
   if (!searchedMovie) {
@@ -116,6 +133,7 @@ export default class App extends React.Component {
   }
 
   render(){
+    const {movies} = this.props;
     var movieReviewPanel = this.state.isMovieReview ?
       ( <div>
           <MovieReview movie={this.movie} pageName={pageName}
@@ -130,7 +148,7 @@ export default class App extends React.Component {
       <ErrorBoundary>
         {movieReviewPanel}
         <Separator/>
-        <MoviesContainer movies={this.state.movies}
+        <MoviesContainer movies={movies}
         onClick={ (movie) => this.showMovieReview(movie)}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
@@ -138,3 +156,4 @@ export default class App extends React.Component {
   )
 }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(App);

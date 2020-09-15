@@ -12,6 +12,10 @@ export default class EditMovie extends React.Component{
     this.resetForm = this.resetForm.bind(this);
    }
 
+componentDidMount(){
+  var date = new Date(this.movie.release_date);
+  this.setState({release_date: date});
+}
   handleChange(event) {
    this.setState({[event.target.name]: event.target.value});
   }
@@ -22,7 +26,7 @@ export default class EditMovie extends React.Component{
   }
 
   setDate(date){
-   this.setState({releaseDate: date});
+   this.setState({release_date: date});
   }
 
   resetForm(){
@@ -45,11 +49,11 @@ export default class EditMovie extends React.Component{
           </label>
           <label>
             Release date:
-            <DatePicker selected={this.movie.releaseDate} className='formStyleInput' onChange={date => this.setDate(date)}/>
+            <DatePicker selected={this.release_date} className='formStyleInput' onChange={date => this.setDate(date)}/>
           </label>
           <label>
             Movie URL:
-            <input type='text' name='movieUrl' className='formStyleInput' value={this.movie.movieUrl} onChange={this.handleChange} />
+            <input type='text' name='movieUrl' className='formStyleInput' value={this.movie.poster_path} onChange={this.handleChange} />
           </label>
           <label>
             Genre:
@@ -66,7 +70,7 @@ export default class EditMovie extends React.Component{
           </label>
           <label>
             Runtime:
-            <input type='text' name='runtime' className='formStyleInput' value={this.movie.duration} onChange={this.handleChange} />
+            <input type='text' name='runtime' className='formStyleInput' value={this.movie.runtime} onChange={this.handleChange} />
           </label>
           <input className='resetInput' type='reset' value='Reset' onClick={this.resetForm} />
           <input className='submitInput' type='submit' value='Submit'/>
