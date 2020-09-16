@@ -6,7 +6,7 @@ import ContextMenu from './ContextMenu';
 import EditMovie from './EditMovie';
 import DeleteMovie from './DeleteMovie';
 
-export default function MovieCard (props){
+function MovieCard ({movie, onClick}){
   const [isShown, setIsShown] = useState(false);
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -17,13 +17,13 @@ export default function MovieCard (props){
   };
 
   const editMovie = () => {
-    console.log('Movie title to edit is ' +  props.movie.title)
+    console.log('Movie title to edit is ' +  movie.title)
     setIsContextMenuOpen(false)
     setIsEditModalOpen(true)
   };
 
   const deleteMovie = () => {
-    console.log('Movie title to delete is ' +  props.movie.title)
+    console.log('Movie title to delete is ' +  movie.title)
     setIsContextMenuOpen(false)
     setIsDeleteModalOpen(true)
   };
@@ -52,18 +52,8 @@ export default function MovieCard (props){
       setIsContextMenuOpen(true)
     };
 
-  var showEditMovie = isEditModalOpen
-            ? ( <EditMovie movie={props.movie}
-              onCloseRequest={closeEditMovie}/>)
-            : '';
-
-  var showDeleteMovie = isDeleteModalOpen
-            ? ( <DeleteMovie movie={props.movie}
-              onCloseRequest={closeDeleteMovie}/>)
-            : '';
-
   const showMovieReview = () => {
-    props.onClick(props.movie)
+    onClick(movie)
   };
 
   return  (
@@ -73,16 +63,16 @@ export default function MovieCard (props){
       onMouseLeave={() => setIsShown(false)}>
       {isShown && <ThreeDots dotsClick={dotsClick}/>}
       {isContextMenuOpen && <ContextMenu menuItems={menuItems} onClose={closeContextMenu}/>}
-      {isDeleteModalOpen && showDeleteMovie}
-      {isEditModalOpen && showEditMovie}
-      <img className='moviePoster' alt='movie poster' src={props.movie.poster_path}
+      {isDeleteModalOpen && <DeleteMovie movie={movie} onCloseRequest={closeDeleteMovie}/>}
+      {isEditModalOpen && <EditMovie movie={movie} onCloseRequest={closeEditMovie}/>}
+      <img className='moviePoster' alt='movie poster' src={movie.poster_path}
       onClick={() => showMovieReview()}/>
       <div className='movieAllInfo'>
         <div className='movieInfo'>
-            <p>{props.movie.title}</p>
-            <p>{props.movie.genre}</p>
+            <p>{movie.title}</p>
+            <p>{movie.genre}</p>
         </div>
-        <div className='movieYear' >{props.movie.release_date}</div>
+        <div className='movieYear' >{movie.release_date}</div>
       </div>
     </div>
   )
@@ -91,3 +81,5 @@ export default function MovieCard (props){
 MovieCard.propTypes ={
   movie: PropTypes.object.isRequired
 }
+
+export default MovieCard

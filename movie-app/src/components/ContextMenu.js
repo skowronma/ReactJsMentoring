@@ -1,15 +1,14 @@
 import React from 'react';
 
-export default function ContextMenu(props) {
+const ContextMenuItems = ({ menuItems }) => menuItems.map((item) =>
+        <div className='contextMenuItem' key={item.id} onClick={item.action}>
+          {item.text}
+        </div>)
 
-const contextMenuitems = props.menuItems.map((item) => (
-    <div className='contextMenuItem' key={item.id} onClick={item.action}>{item.text}</div>
-  ))
-
-  return (
+const ContextMenu = ({ menuItems, onClose }) =>
       <div className='contextMenu'>
-        <span className='contextMenuClose' onClick={props.onClose}>x</span>
-          {contextMenuitems}
-        </div>
-  )
-}
+        <span className='contextMenuClose' onClick={onClose}>x</span>
+        <ContextMenuItems menuItems={menuItems} />
+      </div>
+
+export default ContextMenu

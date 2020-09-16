@@ -1,7 +1,7 @@
 import React from 'react';
 import MoviesCount from './MoviesCount';
-import MoviesList from './MoviesList';
 import SortComponent from './SortComponent';
+import MovieCard from './MovieCard';
 
 export default function MoviesContainer(props){
   return (
@@ -10,9 +10,15 @@ export default function MoviesContainer(props){
       {props.movies != null ?
       <>
         <MoviesCount movieCount={props.movies.length} />
-        <MoviesList movies={props.movies} onClick={(movie) => props.onClick(movie)}/>
+        <div className='moviesList'>
+        {
+          props.movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} onClick={(movie) => props.onClick(movie)}/>
+          ))
+        }
+        </div>
       </>
-        : <div>Loading</div>
+        : <div>Loading...</div>
       }
     </div>
   )
