@@ -1,81 +1,102 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
+ import * as Yup from 'yup';
 import Modal from './Modal';
 
+export const DatePickerField = ({ ...props }) => {
+  const { setFieldValue } = useFormikContext();
+  const [field] = useField(props);
+  return (
+    <DatePicker
+      {...field}
+      {...props}
+      selected={(field.value && new Date(field.value)) || null}
+      onChange={val => {
+        setFieldValue(field.name, val);
+      }}
+    />
+  );
+};
+
 export default class AddMovie extends React.Component{
-  constructor(props) {
-   super(props);
-   this.state = {
-     title: '',
-     releaseDate: '',
-     movieUrl : '',
-     genre: '',
-     duration: '',
-     runtime : ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.resetForm = this.resetForm.bind(this);
-   }
-
-  handleChange(event) {
-   const target = event.target;
-   const name = target.name;
-   this.setState({[name]: target.value});
-  }
-
-  handleSubmit(event) {
-   event.preventDefault();
-   console.log('Movie added');
-  }
-
-  setDate(date){
-   this.setState({releaseDate: date});
-  }
-
-  resetForm(){
-     this.setState({ title: '', releaseDate: '',movieUrl: '',genre: '',duration: '', runtime: '' });
-  }
-
   render(){
     return (
       <Modal onCloseRequest={this.props.onCloseRequest}>
        <h1>ADD MOVIE</h1>
        <div className='formStyle'>
-         <form onSubmit={this.handleSubmit}>
-          <label>
-            Title:
-            <input type='text' name='title' className='formStyleInput' placeholder='Movie title here' value={this.state.title} onChange={this.handleChange}/>
-          </label>
-          <label>
-            Release date:
-            <DatePicker selected={this.state.releaseDate} className='formStyleInput' placeholder='Select date' onChange={date => this.setDate(date)}/>
-          </label>
-          <label>
-            Movie URL:
-            <input type='text' name='movieUrl' className='formStyleInput' placeholder='Movie URL here' value={this.state.movieUrl} onChange={this.handleChange} />
-          </label>
-          <label>
-            Genre:
-            <select value={this.state.genre} name='genre' placeholder='Select genre' onChange={this.handleChange}>
-              <option value='documentary'>DOCUMENTARY</option>
-              <option value='comedy'>COMEDY</option>
-              <option value='horror'>HORROR</option>
-              <option value='crime'>CRIME</option>
-            </select>
-          </label>
-          <label>
-            duration:
-            <input type='text' name='duration' className='formStyleInput' placeholder='duration here' value={this.state.duration} onChange={this.handleChange} />
-          </label>
-          <label>
-            Runtime:
-            <input type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' value={this.state.runtime} onChange={this.handleChange} />
-          </label>
-          <input className='resetInput' type='reset' value='Reset' onClick={this.resetForm} />
-          <input className='submitInput' type='submit' value='Submit'/>
-         </form>
+       <Formik
+             initialValues={{
+               title: '',
+               release_date: '',
+               poster_path : '',
+               genres: 'documentary',
+               overview: '',
+               runtime : '' }}
+             validationSchema={Yup.object({
+               title: Yup.string()
+                 .required('Title required'),
+               poster_path: Yup.string()
+                 .matches(
+                     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                     'Enter correct url!'
+                 )
+              .required('Movie URL required'),
+             genres: Yup.string()
+               .required('Genre required'),
+             overview: Yup.string()
+               .required('Overview required'),
+             runtime: Yup.string()
+               .matches(/^[0-9]*$/)
+               .required('Runtime required')
+                 })}
+             onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                 alert(JSON.stringify(values, null, 2));
+                 setSubmitting(false);
+               }, 400);
+             }}
+           >
+          <Form>
+           <label htmlFor='title'>
+              Title
+              <Field type='text' name='title' className='formStyleInput' placeholder='Movie title here' />
+           </label>
+          <ErrorMessage name='title' component='div' className='errorMsg'/>
+            <label>
+              Release date:
+              <DatePickerField name="release_date"  className='formStyleInput'/>
+            </label>
+            <label>
+              Movie URL:
+              <Field type='text' name='poster_path' className='formStyleInput' placeholder='Movie URL here' />
+            </label>
+            <ErrorMessage name='poster_path' component='div' className='errorMsg'/>
+            <label>
+              Genre:
+              <Field name='genres' placeholder='Select genre' as="select">
+                <option value='documentary'>DOCUMENTARY</option>
+                <option value='comedy'>COMEDY</option>
+                <option value='horror'>HORROR</option>
+                <option value='crime'>CRIME</option>
+              </Field>
+            </label>
+            <ErrorMessage name='genres' component='div' className='errorMsg'/>
+            <label>
+              Overview:
+              <Field type='text' name='overview' className='formStyleInput' placeholder='Overview here' />
+            </label>
+            <ErrorMessage name='overview' component='div' className='errorMsg'/>
+            <label>
+              Runtime:
+              <Field type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' />
+            </label>
+            <ErrorMessage name='runtime' component='div' className='errorMsg'/>
+            <button className='resetInput' type='reset'>RESET</button>
+            <button className='submitInput' type='submit'>Submit</button>
+           </Form>
+         </Formik>
         </div>
       </Modal>
     )
