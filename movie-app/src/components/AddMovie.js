@@ -75,7 +75,7 @@ export default class AddMovie extends React.Component{
             <ErrorMessage name='poster_path' component='div' className='errorMsg'/>
             <label>
               Genre:
-              <Field name='genres' placeholder='Select genre' as="select">
+              <Field name='genres' placeholder='Select genre' as='select'>
                 <option value='documentary'>DOCUMENTARY</option>
                 <option value='comedy'>COMEDY</option>
                 <option value='horror'>HORROR</option>

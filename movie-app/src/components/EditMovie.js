@@ -1,80 +1,100 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
+ import * as Yup from 'yup';
 import Modal from './Modal';
+
+export const DatePickerField = ({ ...props }) => {
+  const { setFieldValue } = useFormikContext();
+  const [field] = useField(props);
+  return (
+    <DatePicker
+      {...field}
+      {...props}
+      selected={(field.value && new Date(field.value)) || null}
+      onChange={val => {
+        setFieldValue(field.name, val);
+      }}
+    />
+  );
+};
 
 export default class EditMovie extends React.Component{
   constructor(props) {
    super(props);
     this.movie = props.movie
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.resetForm = this.resetForm.bind(this);
    }
-
-componentDidMount(){
-  var date = new Date(this.movie.release_date);
-  this.setState({release_date: date});
-}
-  handleChange(event) {
-   this.setState({[event.target.name]: event.target.value});
-  }
-
-  handleSubmit(event) {
-   event.preventDefault();
-   console.log('Movie edited');
-  }
-
-  setDate(date){
-   this.setState({release_date: date});
-  }
-
-  resetForm(){
-
-  }
 
   render(){
     return (
       <Modal onCloseRequest={this.props.onCloseRequest}>
        <h1>EDIT MOVIE</h1>
        <div className='formStyle'>
-         <form onSubmit={this.handleSubmit}>
+         <Formik  enableReinitialize={true} initialValues={this.movie}
+
+               validationSchema={Yup.object({
+                 title: Yup.string()
+                   .required('Title required'),
+                 poster_path: Yup.string()
+                   .matches(
+                       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                       'Enter correct url!'
+                   )
+                .required('Movie URL required'),
+               genres: Yup.string()
+                 .required('Genre required'),
+               overview: Yup.string()
+                 .required('Overview required'),
+               runtime: Yup.string()
+                 .matches(/^[0-9]*$/)
+                 .required('Runtime required')
+                   })}
+               onSubmit={(values, { setSubmitting }) => {
+                  setTimeout(() => {
+                   alert(JSON.stringify(values, null, 2));
+                   setSubmitting(false);
+                 }, 400);
+               }}
+             >
+         <Form>
          <label>
            Movie ID:
            <label className='displayInline'>{this.movie.id}</label>
          </label>
           <label>
             Title:
-            <input type='text' name='title' className='formStyleInput' value={this.movie.title} onChange={this.handleChange}/>
+            <Field type='text' name='title' className='formStyleInput' placeholder='Movie title here' />
           </label>
+          <ErrorMessage name='title' component='div' className='errorMsg'/>
           <label>
             Release date:
-            <DatePicker selected={this.release_date} className='formStyleInput' onChange={date => this.setDate(date)}/>
+            <DatePickerField name="release_date"  className='formStyleInput'/>
           </label>
           <label>
             Movie URL:
-            <input type='text' name='movieUrl' className='formStyleInput' value={this.movie.poster_path} onChange={this.handleChange} />
+            <Field type='text' name='poster_path' className='formStyleInput' placeholder='Movie URL here' />
           </label>
+          <ErrorMessage name='poster_path' component='div' className='errorMsg'/>
           <label>
             Genre:
-            <select value={this.movie.genre} name='genre' onChange={this.handleChange}>
-              <option value='documentary'>DOCUMENTARY</option>
-              <option value='comedy'>COMEDY</option>
-              <option value='horror'>HORROR</option>
-              <option value='crime'>CRIME</option>
-            </select>
+            <Field type='text' name='genres' className='formStyleInput' placeholder='Select genre'/>
           </label>
+          <ErrorMessage name='genres' component='div' className='errorMsg'/>
           <label>
             Overview:
-            <input type='text' name='overview' className='formStyleInput'value={this.movie.overview} onChange={this.handleChange} />
+            <Field type='text' name='overview' className='formStyleInput' placeholder='Overview here' />
           </label>
+          <ErrorMessage name='overview' component='div' className='errorMsg'/>
           <label>
             Runtime:
-            <input type='text' name='runtime' className='formStyleInput' value={this.movie.runtime} onChange={this.handleChange} />
+            <Field type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' />
           </label>
-          <input className='resetInput' type='reset' value='Reset' onClick={this.resetForm} />
-          <input className='submitInput' type='submit' value='Submit'/>
-         </form>
+          <ErrorMessage name='runtime' component='div' className='errorMsg'/>
+          <button className='resetInput' type='reset'>RESET</button>
+          <button className='submitInput' type='submit'>Submit</button>
+         </Form>
+         </Formik>
         </div>
       </Modal>
     )
