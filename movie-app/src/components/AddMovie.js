@@ -4,6 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
  import * as Yup from 'yup';
 import Modal from './Modal';
+import * as actions from '../actions/actionCreator';
+//import { connect } from 'react-redux';
 
 export const DatePickerField = ({ ...props }) => {
   const { setFieldValue } = useFormikContext();
@@ -20,7 +22,13 @@ export const DatePickerField = ({ ...props }) => {
   );
 };
 
-export default class AddMovie extends React.Component{
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     addMovie: (values) => dispatch(actions.addMovies(values)),
+//   };
+// }
+
+class AddMovie extends React.Component{
   render(){
     return (
       <Modal onCloseRequest={this.props.onCloseRequest}>
@@ -31,7 +39,7 @@ export default class AddMovie extends React.Component{
                title: '',
                release_date: '',
                poster_path : '',
-               genres: 'documentary',
+               genres: ['documentary'],
                overview: '',
                runtime : '' }}
              validationSchema={Yup.object({
@@ -52,10 +60,13 @@ export default class AddMovie extends React.Component{
                .required('Runtime required')
                  })}
              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
+          //      setTimeout(() => {
+                  const { dispatch } = this.props;
+                    setSubmitting(true);
                  alert(JSON.stringify(values, null, 2));
-                 setSubmitting(false);
-               }, 400);
+                 dispatch(actions.addMovies(values))
+                // setSubmitting(false);
+              // }, 400);
              }}
            >
           <Form>
@@ -74,16 +85,6 @@ export default class AddMovie extends React.Component{
             </label>
             <ErrorMessage name='poster_path' component='div' className='errorMsg'/>
             <label>
-              Genre:
-              <Field name='genres' placeholder='Select genre' as='select'>
-                <option value='documentary'>DOCUMENTARY</option>
-                <option value='comedy'>COMEDY</option>
-                <option value='horror'>HORROR</option>
-                <option value='crime'>CRIME</option>
-              </Field>
-            </label>
-            <ErrorMessage name='genres' component='div' className='errorMsg'/>
-            <label>
               Overview:
               <Field type='text' name='overview' className='formStyleInput' placeholder='Overview here' />
             </label>
@@ -93,6 +94,16 @@ export default class AddMovie extends React.Component{
               <Field type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' />
             </label>
             <ErrorMessage name='runtime' component='div' className='errorMsg'/>
+            <label>
+              Genre:
+              <Field name='genres' placeholder='Select genre' as='select' multiple={true}>
+                <option value='documentary'>DOCUMENTARY</option>
+                <option value='comedy'>COMEDY</option>
+                <option value='horror'>HORROR</option>
+                <option value='crime'>CRIME</option>
+              </Field>
+            </label>
+            <ErrorMessage name='genres' component='div' className='errorMsg'/>
             <button className='resetInput' type='reset'>RESET</button>
             <button className='submitInput' type='submit'>Submit</button>
            </Form>
@@ -102,3 +113,6 @@ export default class AddMovie extends React.Component{
     )
   }
 }
+
+export default AddMovie
+// connect(null, mapDispatchToProps)(AddMovie);

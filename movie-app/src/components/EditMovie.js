@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
  import * as Yup from 'yup';
 import Modal from './Modal';
+import * as actions from '../actions/actionCreator';
 
 export const DatePickerField = ({ ...props }) => {
   const { setFieldValue } = useFormikContext();
@@ -31,9 +32,10 @@ export default class EditMovie extends React.Component{
       <Modal onCloseRequest={this.props.onCloseRequest}>
        <h1>EDIT MOVIE</h1>
        <div className='formStyle'>
-         <Formik  enableReinitialize={true} initialValues={this.movie}
-
-               validationSchema={Yup.object({
+         <Formik
+             enableReinitialize={true}
+             initialValues={this.movie}
+             validationSchema={Yup.object({
                  title: Yup.string()
                    .required('Title required'),
                  poster_path: Yup.string()
@@ -48,11 +50,14 @@ export default class EditMovie extends React.Component{
                  .required('Overview required'),
                runtime: Yup.string()
                  .matches(/^[0-9]*$/)
-                 .required('Runtime required')
+                 .required('Runtime required'),
+                 id: Yup.string()
+                   .required('Title required')
                    })}
                onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
                    alert(JSON.stringify(values, null, 2));
+                   actions.updateMovies(values);
                    setSubmitting(false);
                  }, 400);
                }}

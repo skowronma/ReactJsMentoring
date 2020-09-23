@@ -53,7 +53,42 @@ export function getMovies() {
         dispatch(getAllMovies(movies));
       })
       .catch(error => {
+        console.log(error);
         dispatch(getAllMoviesError(error));
       })
   }
+}
+
+export function updateMovies(movie) {
+  return dispatch => {
+   fetch('http://localhost:4000/movies', {
+        method: "PUT",
+        body: JSON.stringify(movie),
+    })
+    .catch(error => {
+      console.log(error);
+      alert("Movie update failed, please try again!");
+    })
+    .then(res => {
+        alert("Movie updated!");
+        dispatch(editMovie(movie));
+    })
+   }
+}
+
+export function addMovies(movie) {
+  return dispatch => {
+   fetch('http://localhost:4000/movies', {
+        method: "POST",
+        body: JSON.stringify(movie),
+    })
+    .catch(error => {
+      console.log(error);
+      alert("Adding movie failed, please try again!");
+    })
+    .then(res => {
+        alert("Movie added!");
+        dispatch(addMovie(movie));
+    })
+   }
 }
