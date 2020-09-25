@@ -12,7 +12,7 @@ import * as actions from './actions/actionCreator';
 import { connect } from 'react-redux';
 
 var pageName = 'netflixroulette';
-var allMovies=[];
+
 function mapStateToProps(state) {
   return {
     movies: state.data,
@@ -30,6 +30,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isMovieReview : false,
+      movies: [],
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.closeMovieReview = this.closeMovieReview.bind(this);
@@ -40,12 +41,19 @@ componentDidMount(){
   this.props.getMovies();
 }
 
-  handleSearch(searchedMovie) {
-  if (!searchedMovie) {
-    this.setState({ movies: allMovies });
+componentDidUpdate(prevProps) {
+    if (prevProps.movies !== this.props.movies) {
+      this.setState({ movies: this.props.movies });
+    }
   }
 
-  const filteredMovies = allMovies.filter((movie) =>
+  handleSearch(searchedMovie) {
+  if (!searchedMovie) {
+    this.setState({ movies: this.props.movies });
+    return;
+  }
+
+  const filteredMovies = this.state.movies.filter((movie) =>
     movie.title
       .toLocaleLowerCase()
       .includes(searchedMovie.toLocaleLowerCase())
@@ -65,7 +73,6 @@ componentDidMount(){
   }
 
   render(){
-    const {movies} = this.props;
     var movieReviewPanel = this.state.isMovieReview ?
       ( <div>
           <MovieReview movie={this.movie} pageName={pageName}
@@ -80,7 +87,7 @@ componentDidMount(){
       <ErrorBoundary>
         {movieReviewPanel}
         <Separator/>
-        <MoviesContainer movies={movies}
+        <MoviesContainer movies={this.state.movies}
         onClick={ (movie) => this.showMovieReview(movie)}/>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
