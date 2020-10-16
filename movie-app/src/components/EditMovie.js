@@ -4,7 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
  import * as Yup from 'yup';
 import Modal from './Modal';
-import * as actions from '../actions/actionCreator';
+import updateMovies from '../actions/actionCreator';
+import { connect } from 'react-redux';
 
 export const DatePickerField = ({ ...props }) => {
   const { setFieldValue } = useFormikContext();
@@ -21,7 +22,13 @@ export const DatePickerField = ({ ...props }) => {
   );
 };
 
-export default class EditMovie extends React.Component{
+function mapDispatchToProps(dispatch) {
+  return {
+    editMovie: () => dispatch(updateMovies)
+      };
+}
+
+class EditMovie extends React.Component{
   constructor(props) {
    super(props);
     this.movie = props.movie
@@ -55,11 +62,9 @@ export default class EditMovie extends React.Component{
                    .required('Title required')
                    })}
                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
                    alert(JSON.stringify(values, null, 2));
-                   actions.updateMovies(values);
-                   setSubmitting(false);
-                 }, 400);
+                   this.props.editMovie(values);
+                  setSubmitting(false);
                }}
              >
          <Form>
@@ -105,3 +110,5 @@ export default class EditMovie extends React.Component{
     )
   }
 }
+
+export default connect(null, mapDispatchToProps)(EditMovie);

@@ -4,8 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, Field, Form, ErrorMessage, useField, useFormikContext  } from 'formik';
  import * as Yup from 'yup';
 import Modal from './Modal';
-import * as actions from '../actions/actionCreator';
-//import { connect } from 'react-redux';
+import addMovies from '../actions/actionCreator';
+import { connect } from 'react-redux';
 
 export const DatePickerField = ({ ...props }) => {
   const { setFieldValue } = useFormikContext();
@@ -22,11 +22,11 @@ export const DatePickerField = ({ ...props }) => {
   );
 };
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     addMovie: (values) => dispatch(actions.addMovies(values)),
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    addMovie: () => dispatch(addMovies)
+      };
+}
 
 class AddMovie extends React.Component{
   render(){
@@ -60,13 +60,10 @@ class AddMovie extends React.Component{
                .required('Runtime required')
                  })}
              onSubmit={(values, { setSubmitting }) => {
-          //      setTimeout(() => {
-                  const { dispatch } = this.props;
-                    setSubmitting(true);
-                 alert(JSON.stringify(values, null, 2));
-                 dispatch(actions.addMovies(values))
-                // setSubmitting(false);
-              // }, 400);
+               setSubmitting(true);
+                alert(JSON.stringify(values, null, 2));
+                this.props.addMovie(values);
+                setSubmitting(false);
              }}
            >
           <Form>
@@ -114,5 +111,4 @@ class AddMovie extends React.Component{
   }
 }
 
-export default AddMovie
-// connect(null, mapDispatchToProps)(AddMovie);
+export default connect(null, mapDispatchToProps)(AddMovie);

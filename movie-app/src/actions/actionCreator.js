@@ -65,30 +65,30 @@ export function updateMovies(movie) {
         method: "PUT",
         body: JSON.stringify(movie),
     })
+    .then(response => response.json())
+    .then(movie => {
+      dispatch(editMovie(movie));
+    })
     .catch(error => {
       console.log(error);
       alert("Movie update failed, please try again!");
     })
-    .then(res => {
-        alert("Movie updated!");
-        dispatch(editMovie(movie));
-    })
    }
 }
 
-export function addMovies(movie) {
+export default function addMovies(movie) {
   return dispatch => {
    fetch('http://localhost:4000/movies', {
         method: "POST",
         body: JSON.stringify(movie),
     })
+    .then(response => response.json())
+    .then(movie => {
+      dispatch(addMovie(movie));
+    })
     .catch(error => {
       console.log(error);
       alert("Adding movie failed, please try again!");
-    })
-    .then(res => {
-        alert("Movie added!");
-        dispatch(addMovie(movie));
     })
    }
 }
