@@ -91,7 +91,7 @@ class EditMovie extends React.Component{
           <ErrorMessage name='overview' component='div' className='errorMsg'/>
           <label>
             Runtime:
-            <Field type='text' name='runtime' className='formStyleInput' placeholder='Runtime here' />
+            <Field type='number' name='runtime' className='formStyleInput' placeholder='Runtime here' />
           </label>
           <ErrorMessage name='runtime' component='div' className='errorMsg'/>
           <button className='resetInput' type='reset'>RESET</button>
