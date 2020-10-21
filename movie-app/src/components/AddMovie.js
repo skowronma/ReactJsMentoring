@@ -49,8 +49,7 @@ class AddMovie extends React.Component{
                .required('Genre required'),
              overview: Yup.string()
                .required('Overview required'),
-             runtime: Yup.string()
-               .matches(/^[0-9]*$/)
+             runtime: Yup.number()
                .required('Runtime required')
                  })}
              onSubmit={(values, { setSubmitting }) => {
