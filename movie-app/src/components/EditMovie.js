@@ -22,12 +22,6 @@ export const DatePickerField = ({ ...props }) => {
   );
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    editMovie: () => dispatch(updateMovies)
-      };
-}
-
 class EditMovie extends React.Component{
   constructor(props) {
    super(props);
@@ -63,7 +57,7 @@ class EditMovie extends React.Component{
                    })}
                onSubmit={(values, { setSubmitting }) => {
                    alert(JSON.stringify(values, null, 2));
-                   this.props.editMovie(values);
+                   this.props.dispatch(updateMovies(values));
                   setSubmitting(false);
                }}
              >
@@ -111,4 +105,4 @@ class EditMovie extends React.Component{
   }
 }
 
-export default connect(null, mapDispatchToProps)(EditMovie);
+export default connect()(EditMovie);

@@ -60,35 +60,50 @@ export function getMovies() {
 }
 
 export function updateMovies(movie) {
+  const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(movie)
+  };
   return dispatch => {
-   fetch('http://localhost:4000/movies', {
-        method: "PUT",
-        body: JSON.stringify(movie),
-    })
-    .then(response => response.json())
-    .then(movie => {
-      dispatch(editMovie(movie));
-    })
+   fetch('http://localhost:4000/movies', requestOptions)
+   .then(async response => {
+     var data = await response.json();
+     if (!response.ok) {
+         const error = (data && data.messages) || response.status;
+         return Promise.reject(error);
+           }
+         alert("Movie was edited");
+        dispatch(addMovie(data));
+   })
     .catch(error => {
       console.log(error);
-      alert("Movie update failed, please try again!");
+      alert("Movie update failed, please try again! " + error);
     })
    }
 }
 
+
 export default function addMovies(movie) {
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(movie)
+  };
   return dispatch => {
-   fetch('http://localhost:4000/movies', {
-        method: "POST",
-        body: JSON.stringify(movie),
-    })
-    .then(response => response.json())
-    .then(movie => {
-      dispatch(addMovie(movie));
+   fetch('http://localhost:4000/movies', requestOptions)
+    .then(async response => {
+      var data = await response.json();
+      if (!response.ok) {
+          const error = (data && data.messages) || response.status;
+          return Promise.reject(error);
+            }
+          alert("Movie was added");
+         dispatch(addMovie(data));
     })
     .catch(error => {
       console.log(error);
-      alert("Adding movie failed, please try again!");
+      alert("Adding movie failed, please try again! Error: " + error);
     })
    }
 }
