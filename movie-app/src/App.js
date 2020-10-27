@@ -10,6 +10,12 @@ import ErrorBoundary from './components/ErrorBoundary';
 import MovieReview from './components/MovieReview';
 import * as actions from './actions/actionCreator';
 import { connect } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 var pageName = 'netflixroulette';
 
@@ -87,8 +93,15 @@ componentDidUpdate(prevProps) {
       <ErrorBoundary>
         {movieReviewPanel}
         <Separator/>
-        <MoviesContainer movies={this.state.movies}
-        onClick={ (movie) => this.showMovieReview(movie)}/>
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              <MoviesContainer movies={this.state.movies}
+              onClick={ (movie) => this.showMovieReview(movie)}/>
+            </Route>
+            <Route path='*' component={NotFound} />
+          </Switch>
+        </Router>
         <Footer displaytext={pageName}/>
       </ErrorBoundary>
     </div>
