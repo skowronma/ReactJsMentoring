@@ -5,8 +5,9 @@ import ThreeDots from './ThreeDots'
 import ContextMenu from './ContextMenu';
 import EditMovie from './EditMovie';
 import DeleteMovie from './DeleteMovie';
+import {  Link } from "react-router-dom";
 
-function MovieCard ({movie, onClick}){
+function MovieCard ({movie}){
   const [isShown, setIsShown] = useState(false);
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -52,10 +53,6 @@ function MovieCard ({movie, onClick}){
       setIsContextMenuOpen(true)
     };
 
-  const showMovieReview = () => {
-    onClick(movie)
-  };
-
   return  (
     <div
       className='movieCard'
@@ -65,8 +62,9 @@ function MovieCard ({movie, onClick}){
       {isContextMenuOpen && <ContextMenu menuItems={menuItems} onClose={closeContextMenu}/>}
       {isDeleteModalOpen && <DeleteMovie movie={movie} onCloseRequest={closeDeleteMovie}/>}
       {isEditModalOpen && <EditMovie movie={movie} onCloseRequest={closeEditMovie}/>}
-      <img className='moviePoster' alt='movie poster' src={movie.poster_path}
-      onClick={() => showMovieReview()}/>
+      <Link to={`/film/${movie.id}`}>
+      <img className='moviePoster' alt='movie poster' src={movie.poster_path}/>
+      </Link>
       <div className='movieAllInfo'>
         <div className='movieInfo'>
             <p>{movie.title}</p>

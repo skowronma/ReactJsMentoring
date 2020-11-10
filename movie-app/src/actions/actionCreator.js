@@ -4,7 +4,7 @@ export const ADD_MOVIE = 'ADD_MOVIE';
 export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
-export function getAllMoviesError(error){
+export const getAllMoviesError = (error) => {
   const action={
         type: GET_ALL_ERROR,
         error: error
@@ -12,7 +12,7 @@ export function getAllMoviesError(error){
     return action;
 }
 
-export function getAllMovies(movies){
+export const getAllMovies = (movies) => {
     const action={
         type: GET_ALL,
         movies: movies
@@ -21,7 +21,7 @@ export function getAllMovies(movies){
     return action;
 }
 
-export function addMovie(movie){
+export const addMovie = (movie) => {
     const action={
         type: ADD_MOVIE,
         movie: movie
@@ -29,7 +29,7 @@ export function addMovie(movie){
     return action;
 }
 
-export function editMovie(movie){
+export const editMovie = (movie) => {
     const action={
         type:EDIT_MOVIE,
         movie: movie
@@ -37,7 +37,7 @@ export function editMovie(movie){
     return action;
 }
 
-export function deleteTodo(id){
+export const deleteMovie = (id) =>{
     const action={
         type:DELETE_MOVIE,
         id : id
@@ -45,7 +45,8 @@ export function deleteTodo(id){
     return action;
 }
 
-export function getMovies() {
+
+export const getMovies = () => {
   return dispatch => {
     fetch('http://localhost:4000/movies')
       .then(response => response.json())
@@ -59,7 +60,7 @@ export function getMovies() {
   }
 }
 
-export function updateMovies(movie) {
+export const updateMovies = (movie) =>{
   const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -84,7 +85,7 @@ export function updateMovies(movie) {
 }
 
 
-export default function addMovies(movie) {
+export const addMovies = (movie) => {
   const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -107,3 +108,5 @@ export default function addMovies(movie) {
     })
    }
 }
+
+export default getMovies;

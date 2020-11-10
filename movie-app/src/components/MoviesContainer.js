@@ -13,7 +13,7 @@ export default function MoviesContainer(props){
         <div className='moviesList'>
         {
           props.movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} onClick={(movie) => props.onClick(movie)}/>
+            <MovieCard movie={movie} key={movie.id}/>
           ))
         }
         </div>

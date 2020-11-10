@@ -1,27 +1,50 @@
 import React from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { useParams, Link } from "react-router-dom";
+import {useEffect,  useState }  from "react";
 
-export default function MovieReview(props){
+const mapStateToProps = (state) => ({
+  movies  : state.movies,
+  })
 
-  return (
+function MovieReview(props) {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+
+  useEffect(() => {
+    const filteredMovie = props.movies.find((movie) =>
+      movie.id == id
+    );
+      setSelectedMovie(filteredMovie);
+      });
+
+  var movieReviewPanel = selectedMovie != null  ?
+  ( <div>
+      <div className='movieReviePoster'>
+        <img className='moviePoster' src={selectedMovie.poster_path} alt='Film poster'/>
+      </div>
+      <div>
+        <h1>{selectedMovie.title}
+          <span className='greenText'>{selectedMovie.vote_average}</span>
+        </h1>
+        <p>{selectedMovie.genre}</p>
+        <span className='redText'>{selectedMovie.release_date}</span>
+        <span className='redText'>{selectedMovie.runtime} min</span>
+        <p className='movieReviewOverview'>{selectedMovie.overview}</p>
+       </div>
+      </div>  )
+  : (<div>"Loading movie"</div>);
+
+    return (
         <div className='movieReview'>
             <div>
-                <b className='pageName'>{props.pageName}</b>
-                <button className='closeButton' onClick={props.onClose}>X</button>
+                 <Link to="/">Go Back</Link>
             </div>
-            <div>
-                <div className='movieReviePoster'>
-                    <img className='moviePoster' src={props.movie.poster_path} alt='Film poster'/>
-                </div>
-                <div>
-                    <h1>{props.movie.title}
-                      <span className='greenText'>{props.movie.vote_average}</span>
-                    </h1>
-                    <p>{props.movie.genre}</p>
-                    <span className='redText'>{props.movie.release_date}</span>
-                    <span className='redText'>{props.movie.runtime} min</span>
-                    <p className='movieReviewOverview'>{props.movie.overview}</p>
-                </div>
+                {movieReviewPanel}
             </div>
-        </div>
-    )
+  )
 }
+
+export default connect(mapStateToProps, null)(MovieReview);

@@ -21,8 +21,8 @@ var pageName = 'netflixroulette';
 
 function mapStateToProps(state) {
   return {
-    movies: state.data,
-  };
+    movies: state.movies,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -35,12 +35,9 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isMovieReview : false,
       movies: [],
     };
     this.handleSearch = this.handleSearch.bind(this);
-    this.closeMovieReview = this.closeMovieReview.bind(this);
-    this.movie = null;
   }
 
 componentDidMount(){
@@ -68,36 +65,27 @@ componentDidUpdate(prevProps) {
   this.setState({ movies: filteredMovies });
   }
 
-  showMovieReview(movie){
-    this.movie = movie;
-    this.setState({ isMovieReview: true });
-  }
-
-  closeMovieReview(){
-    this.movie= null;
-    this.setState({ isMovieReview : false });
-  }
 
   render(){
-    var movieReviewPanel = this.state.isMovieReview ?
-      ( <div>
-          <MovieReview movie={this.movie} pageName={pageName}
-           onClose={this.closeMovieReview}/>
-        </div>)
-    : ( <div className='backgroundImage'>
-          <Header pageName={pageName}/>
-          <SearchComponent onSearch={this.handleSearch}/>
-        </div>)
     return (
     <div className='App'>
       <ErrorBoundary>
-        {movieReviewPanel}
+        <div className='backgroundImage'>
+          <Header pageName={pageName}/>
+          <SearchComponent onSearch={this.handleSearch}/>
+        </div>
         <Separator/>
         <Router>
           <Switch>
+            <Route path='/film/:id'>
+              <div>
+                <MovieReview/>
+              </div>
+            </Route>
+            <Route name="search" path="/search/:searchQuery">
+            </Route>
             <Route exact path='/'>
-              <MoviesContainer movies={this.state.movies}
-              onClick={ (movie) => this.showMovieReview(movie)}/>
+              <MoviesContainer movies={this.state.movies}/>
             </Route>
             <Route path='*' component={NotFound} />
           </Switch>
