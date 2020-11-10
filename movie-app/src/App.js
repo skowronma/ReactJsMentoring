@@ -16,6 +16,7 @@ import {
   Route
 } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import SearchResult from './components/SearchResult';
 
 var pageName = 'netflixroulette';
 
@@ -37,7 +38,6 @@ class App extends React.Component {
     this.state = {
       movies: [],
     };
-    this.handleSearch = this.handleSearch.bind(this);
   }
 
 componentDidMount(){
@@ -50,39 +50,24 @@ componentDidUpdate(prevProps) {
     }
   }
 
-  handleSearch(searchedMovie) {
-  if (!searchedMovie) {
-    this.setState({ movies: this.props.movies });
-    return;
-  }
-
-  const filteredMovies = this.state.movies.filter((movie) =>
-    movie.title
-      .toLocaleLowerCase()
-      .includes(searchedMovie.toLocaleLowerCase())
-  );
-
-  this.setState({ movies: filteredMovies });
-  }
-
-
   render(){
     return (
     <div className='App'>
       <ErrorBoundary>
+        <Router>
         <div className='backgroundImage'>
           <Header pageName={pageName}/>
-          <SearchComponent onSearch={this.handleSearch}/>
+          <SearchComponent/>
         </div>
         <Separator/>
-        <Router>
-          <Switch>
+        <Switch>
             <Route path='/film/:id'>
               <div>
                 <MovieReview/>
               </div>
             </Route>
-            <Route name="search" path="/search/:searchQuery">
+            <Route name="search" path="/search/:searchedText">
+              <SearchResult/>
             </Route>
             <Route exact path='/'>
               <MoviesContainer movies={this.state.movies}/>

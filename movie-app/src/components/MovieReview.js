@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect} from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import {useEffect,  useState }  from "react";
 
@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
   })
 
 function MovieReview(props) {
-  const dispatch = useDispatch();
   const { id } = useParams();
   const [selectedMovie, setSelectedMovie] = useState(null);
 

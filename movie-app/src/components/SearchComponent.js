@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {  Link } from "react-router-dom";
 
 export default function SearchComponent(props){
   const [movieToSearch, setMovieToSearch] = useState('');
@@ -10,9 +11,9 @@ export default function SearchComponent(props){
       value={movieToSearch}
       onChange={event => setMovieToSearch(event.target.value)}
       />
-      <button className='searchButton'
-       onClick={() => props.onSearch(movieToSearch)}
-       >SEARCH</button>
+      <Link to={`/search/${movieToSearch}`}>
+        <button className='searchButton'>SEARCH</button>
+      </Link>
     </div>
 
   )
