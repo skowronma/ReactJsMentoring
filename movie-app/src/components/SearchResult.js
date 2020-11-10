@@ -22,10 +22,11 @@ const mapStateToProps = (state) => ({
           .toLocaleLowerCase()
           .includes(searchedText.toLocaleLowerCase())
       );
-        setSearchedMovie(filteredMovies);
-        });
+      setSearchedMovie(filteredMovies);
 
-    var showMovies = searchedMovie != null ?
+    }, []);
+
+    var showMovies = searchedMovie != null && searchedMovie.length > 0?
         (<MoviesContainer movies={searchedMovie}/>)
         : (<MovieNotFound/>);
 
